@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>花伴等级</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+	<style>
+		body, dl, dd, h1, h2, h3, h4, h5, h6, p, form {
+			margin: 0;
+		}
+		body {
+			font-size: 0.85rem;
+			line-height: 1.5;
+		}
+		ol, li, ul {
+			margin: 0;
+			padding: 0;
+		}
+		li {
+			list-style: none;
+		}
+
+		a {
+			text-decoration: none;
+			-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+		}
+		.l {
+			float: left;
+		}
+		.r {
+			float: right;
+		}
+		.fix:after {
+			content: '';
+			display: block;
+			clear: both;
+		}
+		.no_border {
+			border: none !important;
+		}
+		.grade_c{
+			font-size: 0.85rem;
+			background: #F4F4F4;
+		}
+		.grade_c .wrap{
+			padding: 0 0.5rem;
+		}
+		.grade_c .intro{
+			background: white;
+			padding-top: 0.8rem;
+		    padding-bottom: 1rem;
+		}
+		.grade_c ul>li{
+			margin-top: 0.5rem;
+			background: white;
+		}
+		.grade_c ul h2{
+			line-height: 2rem;
+			font-size: 0.85rem;
+			font-weight: normal;
+			padding-left: 0.75rem;
+			border-bottom: 1px solid #EEEEEE;
+		}
+		.grade_l .column{
+			padding-left:0.75rem;
+			float: left;
+			box-sizing: border-box;
+			width:33.33%;
+			border-right: 1px solid #E5E5E5;
+			margin: 0.5rem 0;
+		}
+		.grade_l .column>div{
+			line-height: 1;
+		}
+		.grade_l .column .level{
+			font-size: 0.8rem;
+			color:#666666;
+		}
+		.grade_l .column .num{
+			font-size: 0.8rem;
+			color: #333333;
+			margin-top:0.2rem;
+		}
+		body{
+			background:#F4F4F4;
+		}
+	</style>
+</head>
+<body>
+    <div class="grade_c">
+    	<p class="intro wrap">卡枚连花伴分为粉、黛、金、墨四大级别，每个级别分为3个等级，按照积分规则，共分为12个等级，分别享受对应的活动资讯和福利。花伴可以根据个人需求，选择自己的升级方式。</p>
+    	<ul>
+    		<li class="grade_l fix">
+    			<h2>粉色</h2>
+    			<div class="column">
+    				<div class="level">Lv.1</div>    				
+    				<div class="num">积分0</div>
+    			</div>    			
+    			<div class="column">
+    				<div class="level">Lv.2</div>    				
+    				<div class="num">积分5,000</div>
+    			</div>    			
+    			<div class="column no_border">
+    				<div class="level">Lv.3</div>    				
+    				<div class="num">积分15,000</div>
+    			</div>
+    		</li>
+    		<li class="grade_l fix">
+    			<h2>黛色</h2>
+    			<div class="column">
+    				<div class="level">Lv.1</div>    				
+    				<div class="num">积分20,000</div>
+    			</div>    			
+    			<div class="column">
+    				<div class="level">Lv.2</div>    				
+    				<div class="num">积分50,000</div>
+    			</div>    			
+    			<div class="column no_border">
+    				<div class="level">Lv.3</div>    				
+    				<div class="num">积分100,000</div>
+    			</div>
+    		</li>
+    		<li class="grade_l fix">
+    			<h2>金色</h2>
+    			<div class="column">
+    				<div class="level">Lv.1</div>    				
+    				<div class="num">积分200,000</div>
+    			</div>    			
+    			<div class="column">
+    				<div class="level">Lv.2</div>    				
+    				<div class="num">积分500,000</div>
+    			</div>    			
+    			<div class="column no_border">
+    				<div class="level">Lv.3</div>    				
+    				<div class="num">积分1,000,000</div>
+    			</div>
+    		</li>
+    		<li class="grade_l fix">
+    			<h2>墨色</h2>
+    			<div class="column">
+    				<div class="level">Lv.1</div>    				
+    				<div class="num">积分2,000,000</div>
+    			</div>    			
+    			<div class="column">
+    				<div class="level">Lv.2</div>    				
+    				<div class="num">保密</div>
+    			</div>    			
+    			<div class="column no_border">
+    				<div class="level">Lv.3</div>    				
+    				<div class="num">保密</div>
+    			</div>
+    		</li>
+    	</ul>
+    </div>
+	<script>
+		var docEl = document.documentElement,
+		    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+		    recalc = function() {
+		        docEl.style.fontSize = 20* (docEl.clientWidth / 375) + 'px';
+		    };
+
+		window.addEventListener(resizeEvt, recalc, false);
+		document.addEventListener('DOMContentLoaded', recalc, false);
+	</script>
+</body>
+</html>

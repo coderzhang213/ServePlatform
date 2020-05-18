@@ -1,0 +1,6 @@
+framework module YPBaseSwipeTableView {
+  umbrella header "YPBaseSwipeTableView.h"
+
+  export *
+  module * { export * }
+}

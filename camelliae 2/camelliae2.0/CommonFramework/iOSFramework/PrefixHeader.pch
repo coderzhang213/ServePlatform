@@ -1,0 +1,66 @@
+//
+//  PrefixHeader.pch
+//  camelliae2.0
+//
+//  Created by 张越 on 2017/2/13.
+//  Copyright © 2017年 张越. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+
+//#ifdef DEBUG
+//#define NSLog(...) NSLog(__VA_ARGS__)
+//#define debugMethod() NSLog(@"%s", __func__)
+//#else
+//#define NSLog(...)
+//#define debugMethod()
+//#endif
+
+#define IOS_VERSION      [[[UIDevice currentDevice] systemVersion] floatValue]
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+#import "YYKit.h"
+#import "UIImageView+YYWebImage.h"
+#import <WebKit/WebKit.h>
+
+//#import "CMLDotTypeVC.h"
+//#import "CMLNavigationBar.h"
+#import "CommonNumber.h"
+#import "CommonImg.h"
+#import "CommonFont.h"
+#import "MJRefresh.h"
+#import "NetWorkTask.h"
+#import "NetWorkDelegate.h"
+#import "BaseResultObj.h"
+//#import "CMLLine.h"
+//#import "CMLShareModel.h"
+//#import "PushTransition.h"
+//#import "PopTransition.h"
+//#import "LXAlertView.h"
+//#import "HyTransitions.h"
+//#import "CMLIndicatorView.h"
+#import "UIColor+SDExspand.h"
+//#import "SVProgressHUD.h"
+//#import "JQIndicatorView.h"
+//#import "UIImage+MultiFormat.h"
+#import "DataManager.h"
+//#import "AppGroup.h"
+//#import "NSString+CMLExspand.h"
+//#import "UIColor+SDExspand.h"
+//#import "NSDate+CMLExspand.h"
+#import "UIImage+CMLExspand.h"
+//#import "NSNumber+CMLExspand.h"
+//#import "BaseResultObj.h"
+//#import <UMSocialCore/UMSocialCore.h>
+//#import "CMLShareManager.h"
+//#import "LoginVC.h"
+//#import "SDImageCache.h"
+//#import <UMMobClick/MobClick.h>
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* PrefixHeader_pch */
