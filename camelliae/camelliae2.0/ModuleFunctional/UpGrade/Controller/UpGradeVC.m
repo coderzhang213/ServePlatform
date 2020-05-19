@@ -15,13 +15,9 @@
 #import "ShowBuyTypeView.h"
 #import "ShowOffLinePayType.h"
 #import "WechatPreCallInfo.h"
-#import "WXApiObject.h"
-#import "WXApi.h"
 #import "CMLRSAModule.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "MoreMesView.h"
-#import "Order.h"
-#import "DataSigner.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "NSString+CMLExspand.h"
 #import "CMLRSAModule.h"
@@ -37,10 +33,8 @@
 #import "ShowAgreementView.h"
 #import "MemberEquityDetailView.h"
 #import "MemberAppointmentView.h"
-#import "JPUSHService.h"
 #import "CMLUpGradeImageBgView.h"
 #import "CMLPCMemberCardModel.h"
-#import <UMPush/UMessage.h>
 
 #define EnTitleFontSize    ([UIScreen mainScreen].bounds.size.width*2) > 750 ? 12:10.9
 
@@ -1662,18 +1656,18 @@
     if ([[DataManager lightData] readUserLevel] || [[DataManager lightData] readRoleId]) {
         [tags addObjectsFromArray:self.tagsArray];
         NSLog(@"%@", tags);
-        [JPUSHService setTags:tags completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
-            NSLog(@"iResCode %ld", (long)iResCode);
-            if (iResCode == 0) {
-                NSLog(@"pushTag设置成功");
-            }
-        } seq:0];
-        [UMessage addTags:self.tagsArray response:^(id  _Nullable responseObject, NSInteger remain, NSError * _Nullable error) {
-            NSLog(@"addTags%@", responseObject);
-        }];
-        [UMessage getTags:^(NSSet * _Nonnull responseTags, NSInteger remain, NSError * _Nullable error) {
-            NSLog(@"getTags%@", responseTags);
-        }];
+//        [JPUSHService setTags:tags completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
+//            NSLog(@"iResCode %ld", (long)iResCode);
+//            if (iResCode == 0) {
+//                NSLog(@"pushTag设置成功");
+//            }
+//        } seq:0];
+//        [UMessage addTags:self.tagsArray response:^(id  _Nullable responseObject, NSInteger remain, NSError * _Nullable error) {
+//            NSLog(@"addTags%@", responseObject);
+//        }];
+//        [UMessage getTags:^(NSSet * _Nonnull responseTags, NSInteger remain, NSError * _Nullable error) {
+//            NSLog(@"getTags%@", responseTags);
+//        }];
     }
 }
 

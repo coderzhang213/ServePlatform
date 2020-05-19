@@ -19,8 +19,6 @@
 #import "WXApiObject.h"
 #import "WXApi.h"
 #import "CMLRSAModule.h"
-#import "Order.h"
-#import "DataSigner.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "AppGroup.h"
 #import "DataManager.h"

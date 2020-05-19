@@ -7,8 +7,6 @@
 //
 
 #import "NotificationService.h"
-#import "JPushNotificationExtensionService.h"
-#import "JPUSHService.h"
 #import <UIKit/UIKit.h>
 #import "DataManager.h"
 
@@ -77,11 +75,6 @@
 
 - (void)apnsDeliverWith:(UNNotificationRequest *)request {
     
-    [JPushNotificationExtensionService jpushSetAppkey:@"350b39c5bc69f5a9b2c7e4b4"];
-    [JPushNotificationExtensionService jpushReceiveNotificationRequest:request with:^{
-        NSLog(@"apns upload success");
-        self.contentHandler(self.bestAttemptContent);
-    }];
     
 }
 

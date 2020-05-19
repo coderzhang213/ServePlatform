@@ -129,46 +129,46 @@
 }
 - (void)showViewInfo:(NSArray *)info indexPath:(NSIndexPath *)indexPath
 {
-    NSString *Url = [info objectAtIndex:indexPath.row];
-    
-    SDWebImageManager *webImageManager = [SDWebImageManager sharedManager];
-    NSURL *url = [NSURL URLWithString:Url];
-    //先选择本地缓存，没有再下载
-    UIImage *headImage;
-    [_imageView setImage:headImage];
-    if ([webImageManager diskImageExistsForURL:url])
-    {
-        firstShow = YES;
-        headImage = [webImageManager.imageCache imageFromDiskCacheForKey:[webImageManager cacheKeyForURL:url]];
-        [_imageView setImage:headImage];
-    }
-    else
-    {
-        firstShow= NO;
-         [_photoLoadingView showLoading];
-         [self addSubview:_photoLoadingView];
-        
-         __unsafe_unretained MJPhotoLoadingView *loading = _photoLoadingView;
-         __unsafe_unretained NFPhotoViewCell *photoView = self;
-        
-        [[SDWebImageManager sharedManager] downloadImageWithURL:url options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-            if (receivedSize > kMinProgress) {
-                loading.progress = (float)receivedSize/expectedSize;
-            }
-        } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-
-            [photoView photoDidFinishLoadWithImage:image];
-        }];
-    
-    }
-   [self adjustFrame];
-    
-    /*****/
-    if ([self.isLike intValue] == 1) {
-        likeBtn.selected = YES;
-    }else{
-        likeBtn.selected = NO;
-    }
+//    NSString *Url = [info objectAtIndex:indexPath.row];
+//    
+//    SDWebImageManager *webImageManager = [SDWebImageManager sharedManager];
+//    NSURL *url = [NSURL URLWithString:Url];
+//    //先选择本地缓存，没有再下载
+//    UIImage *headImage;
+//    [_imageView setImage:headImage];
+//    if ([webImageManager diskImageExistsForURL:url])
+//    {
+//        firstShow = YES;
+//        headImage = [webImageManager.imageCache imageFromDiskCacheForKey:[webImageManager cacheKeyForURL:url]];
+//        [_imageView setImage:headImage];
+//    }
+//    else
+//    {
+//        firstShow= NO;
+//         [_photoLoadingView showLoading];
+//         [self addSubview:_photoLoadingView];
+//        
+//         __unsafe_unretained MJPhotoLoadingView *loading = _photoLoadingView;
+//         __unsafe_unretained NFPhotoViewCell *photoView = self;
+//        
+//        [[SDWebImageManager sharedManager] downloadImageWithURL:url options:SDWebImageRetryFailed progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+//            if (receivedSize > kMinProgress) {
+//                loading.progress = (float)receivedSize/expectedSize;
+//            }
+//        } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+//
+//            [photoView photoDidFinishLoadWithImage:image];
+//        }];
+//    
+//    }
+//   [self adjustFrame];
+//    
+//    /*****/
+//    if ([self.isLike intValue] == 1) {
+//        likeBtn.selected = YES;
+//    }else{
+//        likeBtn.selected = NO;
+//    }
 
 }
 

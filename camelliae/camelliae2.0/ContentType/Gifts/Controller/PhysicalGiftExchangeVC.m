@@ -17,8 +17,6 @@
 #import "CMLUserAddressListVC.h"
 #import "CMLAlterAddressMesaageVC.h"
 #import "CMLRSAModule.h"
-#import "Order.h"
-#import "DataSigner.h"
 #import "CMLGiftVC.h"
 
 #define CommodityVCLeftMargin            20

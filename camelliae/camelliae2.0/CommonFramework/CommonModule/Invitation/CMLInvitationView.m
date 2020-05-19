@@ -12,7 +12,6 @@
 #import "CommonNumber.h"
 #import "UIColor+SDExspand.h"
 #import "UIImage+CMLExspand.h"
-#import <UMSocialCore/UMSocialCore.h>
 #import "NetWorkTask.h"
 
 #define MessageBgWidth  520

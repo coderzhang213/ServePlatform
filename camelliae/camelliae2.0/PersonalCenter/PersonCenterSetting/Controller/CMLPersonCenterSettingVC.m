@@ -167,7 +167,8 @@
             
             if (i == 0) {
                 UILabel *label = [[UILabel alloc] init];
-                label.text = [NSString stringWithFormat:@"%luM",[[SDImageCache sharedImageCache] getSize]/(1024*1024)];
+                
+                label.text = [NSString stringWithFormat:@"%luM",[[SDImageCache sharedImageCache] totalDiskSize]/(1024*1024)];
                 label.font = KSystemFontSize14;
                 label.textColor = [UIColor CMLPromptGrayColor];
                 [label sizeToFit];

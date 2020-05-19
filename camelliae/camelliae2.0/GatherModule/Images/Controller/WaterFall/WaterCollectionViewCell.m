@@ -7,7 +7,6 @@
 //
 
 #import "WaterCollectionViewCell.h"
-#import "UIImageView+WebCache.h"
 #import "UIImage+CMLExspand.h"
 
 @interface WaterCollectionViewCell ()

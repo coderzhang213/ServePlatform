@@ -495,7 +495,8 @@
 
                 self.page++;
                 dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                    [[SDImageCache sharedImageCache] cleanDisk];
+                  
+                    [[SDImageCache sharedImageCache] clearMemory];
                 });
                 
                 [self setImageDetailRequest];

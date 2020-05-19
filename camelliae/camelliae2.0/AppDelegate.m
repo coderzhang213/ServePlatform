@@ -12,7 +12,6 @@
 #import "DataManager.h"
 #import "NetConfig.h"
 #import "AppGroup.h"
-#import <UMSocialCore/UMSocialCore.h>
 #import "NetConfig.h"
 #import "NetWorkTask.h"
 #import "NetWorkDelegate.h"
@@ -23,7 +22,6 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "LoginBannerImageObj.h"
 #import "AdPoster.h"
-#import "WXApiManager.h"
 #import "NetworkMessageVC.h"
 #import "NavigationInfo.h"
 #import "CMLPicObjInfo.h"
@@ -36,7 +34,7 @@
 #import "WebViewController.h"
 #import "WebViewLinkVC.h"
 #import <SdkSample/SdkSample.h>
-#import "JPUSHService.h"
+//#import "JPUSHService.h"
 #import "CMLPersonalCenterVC.h"
 
 #import "ActivityDefaultVC.h"
@@ -66,14 +64,9 @@
 // 如果需要使用 idfa 功能所需要引入的头文件（可选）
 #import <AdSupport/AdSupport.h>
 /*bugly*/
-#import <Bugly/Bugly.h>
-/*UMeng*/
-#import <UMCommon/UMCommon.h>
-#import <UMPush/UMessage.h>
-#import <UMAnalytics/MobClick.h>
-#import <UMCommonLog/UMCommonLogHeaders.h>
 
-@interface AppDelegate ()<NetWorkProtocol, UIAlertViewDelegate, CMLPseudoLaunchImageDelegate, UNUserNotificationCenterDelegate, WangMaiSplashAdDelegate, JPUSHRegisterDelegate, LoginVCDelegate>{
+
+@interface AppDelegate ()<NetWorkProtocol, UIAlertViewDelegate, CMLPseudoLaunchImageDelegate, UNUserNotificationCenterDelegate, WangMaiSplashAdDelegate, LoginVCDelegate>{
 
     NSCondition           *condition;
     CMLPseudoLaunchImage  *launchimage;
@@ -121,11 +114,11 @@
     [[UITextView appearance] setTintColor:[UIColor CMLE5C48AColor]];
     
     /*bugly*/
-    [Bugly startWithAppId:@"1251989d41"];
+//    [Bugly startWithAppId:@"1251989d41"];
     /*生产环境设置为NO*/
     [UMConfigure setLogEnabled:NO];
     [MobClick setScenarioType:E_UM_NORMAL];
-    [UMCommonLogManager setUpUMCommonLogManager];
+//    [UMCommonLogManager setUpUMCommonLogManager];
     [UMConfigure initWithAppkey:@"573ed34ae0f55ae3af001f6c" channel:nil];
     
     /*IM*/
@@ -189,27 +182,27 @@
 
 - (void)initUMPushWithLaunchOptions:(NSDictionary *)launchOptions {
 
-#pragma mark 集成测试
-    NSString *deviceID = [UMConfigure deviceIDForIntegration];
-    if ([deviceID isKindOfClass:[NSString class]]) {
-        NSLog(@"服务器端成功返回deviceID%@", deviceID);
-    } else {
-        NSLog(@"服务器端还没有返回deviceID");
-    }
-    //NO：关闭U-Push自动清理--YES：APP在前台时通知栏推送消息会自动消失
-    [UMessage setBadgeClear:NO];
-    /*UM推送*/
-    UMessageRegisterEntity *entity = [[UMessageRegisterEntity alloc] init];
-    entity.types = UMessageAuthorizationOptionAlert|UMessageAuthorizationOptionBadge|UMessageAuthorizationOptionSound;
-    [UNUserNotificationCenter currentNotificationCenter].delegate = self;
-    [UMessage registerForRemoteNotificationsWithLaunchOptions:launchOptions Entity:entity completionHandler:^(BOOL granted, NSError * _Nullable error) {
-        if (!error && granted) {
-            NSLog(@"UMPush注册成功");
-            [self setPushTag];
-        }else {
-            NSLog(@"UMPush注册失败");
-        }
-    }];
+//#pragma mark 集成测试
+//    NSString *deviceID = [UMConfigure deviceIDForIntegration];
+//    if ([deviceID isKindOfClass:[NSString class]]) {
+//        NSLog(@"服务器端成功返回deviceID%@", deviceID);
+//    } else {
+//        NSLog(@"服务器端还没有返回deviceID");
+//    }
+//    //NO：关闭U-Push自动清理--YES：APP在前台时通知栏推送消息会自动消失
+//    [UMessage setBadgeClear:NO];
+//    /*UM推送*/
+//    UMessageRegisterEntity *entity = [[UMessageRegisterEntity alloc] init];
+//    entity.types = UMessageAuthorizationOptionAlert|UMessageAuthorizationOptionBadge|UMessageAuthorizationOptionSound;
+//    [UNUserNotificationCenter currentNotificationCenter].delegate = self;
+//    [UMessage registerForRemoteNotificationsWithLaunchOptions:launchOptions Entity:entity completionHandler:^(BOOL granted, NSError * _Nullable error) {
+//        if (!error && granted) {
+//            NSLog(@"UMPush注册成功");
+//            [self setPushTag];
+//        }else {
+//            NSLog(@"UMPush注册失败");
+//        }
+//    }];
     
 }
 
@@ -277,8 +270,7 @@
     [self APPStartupNetWork];
     
     /**微信微博注册*/
-    [[UMSocialManager defaultManager] setUmSocialAppkey:UMAppKey];
-
+    [UMConfigure initWithAppkey:UMAppKey channel:@"App Store"];
     [self configUSharePlatforms];
     /**统计功能*/
 
@@ -585,8 +577,8 @@
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     
         BOOL UM = [[UMSocialManager defaultManager] handleOpenURL:url];
-        BOOL WX = [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];
-        return  UM || WX;
+//        BOOL WX = [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];
+        return  UM;
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary*)options{
@@ -644,8 +636,8 @@
     } else{
         
         BOOL UM = [[UMSocialManager defaultManager] handleOpenURL:url];
-        BOOL WX = [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];
-        return UM || WX;
+//        BOOL WX = [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];
+        return UM ;
     }
 }
 
@@ -655,7 +647,10 @@
     NSString *requestString = [NSString stringWithFormat:@"http://itunes.apple.com/cn/lookup?id=%@",AppID];
     //header参数
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager POST:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager POST:requestString parameters:nil headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
         if ([AppGroup appVersion]) {
             
             NSDictionary *rootDic = responseObject;
@@ -747,31 +742,9 @@
     }
 }
 
-/*JPush*/
-- (void)jpushInitWith:(NSDictionary *)launchOptions {
-    
-    JPUSHRegisterEntity *entity = [[JPUSHRegisterEntity alloc] init];
-    if (@available(iOS 12.0, *)) {
-        entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound|JPAuthorizationOptionProvidesAppNotificationSettings;
-    } else {
-        entity.types = JPAuthorizationOptionAlert|JPAuthorizationOptionBadge|JPAuthorizationOptionSound;
-    }
-    
-    [JPUSHService registerForRemoteNotificationConfig:entity delegate:self];
-    
-    //广告标识符IDFA
-    //    NSString *advertisingId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
-    [JPUSHService setupWithOption:launchOptions
-                           appKey:appKey
-                          channel:nil
-                 apsForProduction:YES
-            advertisingIdentifier:nil];
-    
-}
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
-//    [JPUSHService registerDeviceToken:deviceToken];
     
     /*推送2*/
     if (![deviceToken isKindOfClass:[NSData class]]) return;
@@ -793,11 +766,11 @@
 
 /*iOS10.0以下 三种情况:前台、后台、kill*/
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    [JPUSHService setBadge:self.badgeNumber + 1];
+//    [JPUSHService setBadge:self.badgeNumber + 1];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:self.badgeNumber + 1];
     NSLog(@"%ld", (long)[[UIApplication sharedApplication] applicationIconBadgeNumber]);
     NSLog(@"fetch - self.badgeNumber %d", self.badgeNumber);
-    [JPUSHService handleRemoteNotification:userInfo];
+//    [JPUSHService handleRemoteNotification:userInfo];
     
     if (application.applicationState == UIApplicationStateActive) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"收到推送消息"
@@ -811,8 +784,8 @@
     }
     
     /*UM推送-收到远程消息推送*/
-    [UMessage setAutoAlert:NO];
-    [UMessage didReceiveRemoteNotification:userInfo];
+//    [UMessage setAutoAlert:NO];
+//    [UMessage didReceiveRemoteNotification:userInfo];
     
     /*推送2-收到远程消息推送*/
     completionHandler(UIBackgroundFetchResultNewData);
@@ -839,8 +812,8 @@
     
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         NSLog(@"收到远程通知");
-        [UMessage setAutoAlert:NO];
-        [UMessage didReceiveRemoteNotification:userInfo];
+//        [UMessage setAutoAlert:NO];
+//        [UMessage didReceiveRemoteNotification:userInfo];
     }else {
         // 判断为本地通知
         NSLog(@"iOS10 收到本地通知:nbody:%@，ntitle:%@,nsubtitle:%@,nbadge：%@，nsound：%@，\nnuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
@@ -854,7 +827,7 @@
 /*收到本地通知*/
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     
-    [JPUSHService showLocalNotificationAtFront:notification identifierKey:nil];
+//    [JPUSHService showLocalNotificationAtFront:notification identifierKey:nil];
     
 }
 
@@ -880,55 +853,55 @@
     NSString *title = content.title;
     NSLog(@"iOS10 收到本地通知:nbody:%@，ntitle:%@,nsubtitle:%@,nbadge：%@，nsound：%@，\nnuserInfo：%@\n}",body,title,subtitle,badge,sound,userInfo);
     
-    if ([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        [UMessage didReceiveRemoteNotification:userInfo];
-        [self notificationPushToDetailWith:userInfo];
-    }
+//    if ([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+//        [UMessage didReceiveRemoteNotification:userInfo];
+//        [self notificationPushToDetailWith:userInfo];
+//    }
     completionHandler();
 }
 
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #pragma mark- JPUSHRegisterDelegate
 - (void)jpushNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(NSInteger))completionHandler {
-    [JPUSHService setBadge:self.badgeNumber + 1];
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:self.badgeNumber + 1];
-    self.badgeNumber = self.badgeNumber + 1;
-    NSLog(@"%ld", (long)[[UIApplication sharedApplication] applicationIconBadgeNumber]);
-    NSLog(@"self.badgeNumber %d", self.badgeNumber);
-    NSDictionary *userInfo = notification.request.content.userInfo;
-    
-    UNNotificationRequest *request = notification.request; // 收到推送的请求
-    UNNotificationContent *content = request.content; // 收到推送的消息内容
-    NSLog(@"request %@", request);
-    NSLog(@"content.badge %@", content.badge);
-    NSLog(@"userInfo %@", userInfo);
-    
-    if ([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        [JPUSHService handleRemoteNotification:userInfo];
-        /*收到远程推送进行的操作*/
-        [[DataManager lightData] saveBadgeNumber:content.badge];/*存储收到通知时的角标数量*/
-        NSLog(@"%d", [[[DataManager lightData] readBadgeNumber] intValue]);
-    }
-    completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert);
+//    [JPUSHService setBadge:self.badgeNumber + 1];
+//    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:self.badgeNumber + 1];
+//    self.badgeNumber = self.badgeNumber + 1;
+//    NSLog(@"%ld", (long)[[UIApplication sharedApplication] applicationIconBadgeNumber]);
+//    NSLog(@"self.badgeNumber %d", self.badgeNumber);
+//    NSDictionary *userInfo = notification.request.content.userInfo;
+//
+//    UNNotificationRequest *request = notification.request; // 收到推送的请求
+//    UNNotificationContent *content = request.content; // 收到推送的消息内容
+//    NSLog(@"request %@", request);
+//    NSLog(@"content.badge %@", content.badge);
+//    NSLog(@"userInfo %@", userInfo);
+//
+//    if ([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+//        [JPUSHService handleRemoteNotification:userInfo];
+//        /*收到远程推送进行的操作*/
+//        [[DataManager lightData] saveBadgeNumber:content.badge];/*存储收到通知时的角标数量*/
+//        NSLog(@"%d", [[[DataManager lightData] readBadgeNumber] intValue]);
+//    }
+//    completionHandler(UNNotificationPresentationOptionBadge|UNNotificationPresentationOptionSound|UNNotificationPresentationOptionAlert);
     
 }
 
 /*极光-应用打开时点击推送消息4*/
-- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
+//- (void)jpushNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
     
-    NSDictionary *userInfo = response.notification.request.content.userInfo;
-    
-    if ([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        [JPUSHService handleRemoteNotification:userInfo];
-        [JPUSHService setBadge:self.badgeNumber - 1];
-        self.badgeNumber = self.badgeNumber - 1;
-        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:self.badgeNumber - 1];
-        NSLog(@"applicationIconBadgeNumber %ld", (long)[[UIApplication sharedApplication] applicationIconBadgeNumber]);
-        NSLog(@"self.badgeNumber %d", self.badgeNumber - 1);
-        [self notificationPushToDetailWith:userInfo];
-    }
-    completionHandler();
-}
+//    NSDictionary *userInfo = response.notification.request.content.userInfo;
+//
+//    if ([response.notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+//        [JPUSHService handleRemoteNotification:userInfo];
+//        [JPUSHService setBadge:self.badgeNumber - 1];
+//        self.badgeNumber = self.badgeNumber - 1;
+//        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:self.badgeNumber - 1];
+//        NSLog(@"applicationIconBadgeNumber %ld", (long)[[UIApplication sharedApplication] applicationIconBadgeNumber]);
+//        NSLog(@"self.badgeNumber %d", self.badgeNumber - 1);
+//        [self notificationPushToDetailWith:userInfo];
+//    }
+//    completionHandler();
+//}
 
 #endif
 
@@ -1247,18 +1220,18 @@
     if ([[DataManager lightData] readUserLevel] || [[DataManager lightData] readRoleId]) {
         [tags addObjectsFromArray:self.tagsArray];
         NSLog(@"AppDelegate tags %@", tags);
-        [JPUSHService setTags:tags completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
-            NSLog(@"iResCode %ld", (long)iResCode);
-            if (iResCode == 0) {
-                NSLog(@"AppDelegatePushTag设置成功");
-            }
-        } seq:0];
-        [UMessage addTags:self.tagsArray response:^(id  _Nullable responseObject, NSInteger remain, NSError * _Nullable error) {
-            NSLog(@"addTags%@", responseObject);
-        }];
-        [UMessage getTags:^(NSSet * _Nonnull responseTags, NSInteger remain, NSError * _Nullable error) {
-            NSLog(@"getTags%@", responseTags);
-        }];
+//        [JPUSHService setTags:tags completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
+//            NSLog(@"iResCode %ld", (long)iResCode);
+//            if (iResCode == 0) {
+//                NSLog(@"AppDelegatePushTag设置成功");
+//            }
+//        } seq:0];
+//        [UMessage addTags:self.tagsArray response:^(id  _Nullable responseObject, NSInteger remain, NSError * _Nullable error) {
+//            NSLog(@"addTags%@", responseObject);
+//        }];
+//        [UMessage getTags:^(NSSet * _Nonnull responseTags, NSInteger remain, NSError * _Nullable error) {
+//            NSLog(@"getTags%@", responseTags);
+//        }];
     }
 }
 

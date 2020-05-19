@@ -13,6 +13,7 @@
 
 + (instancetype) getBaseObjFrom:(id)json{
     NSDictionary *jsonDic = (NSDictionary *)json;
-    return [self objectWithKeyValues:jsonDic];
+    return [self mj_objectWithKeyValues:jsonDic];
+    
 }
 @end

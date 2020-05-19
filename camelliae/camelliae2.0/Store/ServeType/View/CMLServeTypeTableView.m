@@ -26,7 +26,7 @@
 #import "CMLServeObj.h"
 #import "ServeDefaultVC.h"
 #import "VCManger.h"
-#import "CLPlayerView.h"
+
 #import "CMLSBUserPushServeTVCell.h"
 #import "CMLUserPushServeDetailVC.h"
 
@@ -234,13 +234,13 @@
     //    //设置等比例全屏拉伸，多余部分会被剪切
     //    _playerView.fillMode = ResizeAspectFill;
     //设置进度条背景颜色
-    _playerView.progressBackgroundColor = [UIColor grayColor];
-    //设置进度条缓冲颜色
-    _playerView.progressBufferColor = [UIColor grayColor];
-    //设置进度条播放完成颜色
-    _playerView.progressPlayFinishColor = [UIColor whiteColor];
-    //    //全屏是否隐藏状态栏
-    _playerView.fullStatusBarHiddenType = FullStatusBarHiddenNever;
+//    _playerView.progressBackgroundColor = [UIColor grayColor];
+//    //设置进度条缓冲颜色
+//    _playerView.progressBufferColor = [UIColor grayColor];
+//    //设置进度条播放完成颜色
+//    _playerView.progressPlayFinishColor = [UIColor whiteColor];
+//    //    //全屏是否隐藏状态栏
+//    _playerView.fullStatusBarHiddenType = FullStatusBarHiddenNever;
     //    //转子颜色
     //    _playerView.strokeColor = [UIColor redColor];
     //视频地址
@@ -249,10 +249,7 @@
     //播放
     [_playerView playVideo];
     //返回按钮点击事件回调
-    [_playerView destroyPlay:^{
-        cell.stopPlay = YES;
-        NSLog(@"播放器被销毁了");
-    }];
+    [_playerView destroyPlayer];
     [_playerView backButton:^(UIButton *button) {
         NSLog(@"返回按钮被点击");
     }];

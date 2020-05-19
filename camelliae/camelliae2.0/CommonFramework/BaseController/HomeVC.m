@@ -21,8 +21,7 @@
 #import "VCManger.h"
 #import "LoginVC.h"
 #import "CMLLine.h"
-#import "JPUSHService.h"
-#import <UMPush/UMessage.h>
+//#import "JPUSHService.h"
 
 #define TabBarViewHeight         98
 #define TabBarNameBottomMargin   6
@@ -150,18 +149,18 @@
     if ([[DataManager lightData] readUserLevel] || [[DataManager lightData] readRoleId]) {
         [tags addObjectsFromArray:self.tagsArray];
         NSLog(@"HomeVC tags %@", tags);
-        [JPUSHService setTags:tags completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
-            NSLog(@"iResCode %ld", (long)iResCode);
-            if (iResCode == 0) {
-                NSLog(@"HomeVCpushTag设置成功");
-            }
-        } seq:0];
-        [UMessage addTags:self.tagsArray response:^(id  _Nullable responseObject, NSInteger remain, NSError * _Nullable error) {
-            NSLog(@"HomeVCaddTags%@", responseObject);
-        }];
-        [UMessage getTags:^(NSSet * _Nonnull responseTags, NSInteger remain, NSError * _Nullable error) {
-            NSLog(@"HomeVCgetTags%@", responseTags);
-        }];
+//        [JPUSHService setTags:tags completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
+//            NSLog(@"iResCode %ld", (long)iResCode);
+//            if (iResCode == 0) {
+//                NSLog(@"HomeVCpushTag设置成功");
+//            }
+//        } seq:0];
+//        [UMessage addTags:self.tagsArray response:^(id  _Nullable responseObject, NSInteger remain, NSError * _Nullable error) {
+//            NSLog(@"HomeVCaddTags%@", responseObject);
+//        }];
+//        [UMessage getTags:^(NSSet * _Nonnull responseTags, NSInteger remain, NSError * _Nullable error) {
+//            NSLog(@"HomeVCgetTags%@", responseTags);
+//        }];
     }
 }
 
@@ -610,7 +609,10 @@
     NSString *requestString = [NSString stringWithFormat:@"http://itunes.apple.com/cn/lookup?id=%@",AppID];
     //header参数
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager POST:requestString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager POST:requestString parameters:nil headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
         if ([AppGroup appVersion]) {
             
             NSDictionary *rootDic = responseObject;
@@ -683,10 +685,11 @@
                 }
             }
         }
-        
+
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
     }];
+
     
     return NO;
     

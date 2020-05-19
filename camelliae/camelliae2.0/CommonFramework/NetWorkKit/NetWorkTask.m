@@ -74,15 +74,19 @@
                                                         @"text/plain",
                                                         nil];
     
-    [manager GET:requestString parameters:paramDictionary progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager GET:requestString parameters:paramDictionary headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+       
         if ([netWorkDelegate.delegate respondsToSelector:@selector(requestSucceedBack:withApiName:)]) {
             [netWorkDelegate.delegate requestSucceedBack:responseObject withApiName:apiName];
         }
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
         if ([netWorkDelegate.delegate respondsToSelector:@selector(requestFailBack:withApiName:)]) {
             [netWorkDelegate.delegate requestFailBack:error withApiName:apiName];
         }
     }];
+
     
 //    [manager GET:requestString parameters:paramDictionary success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //
@@ -127,18 +131,22 @@
     /**当有网时才能请求*/
 //    if (![netType isEqualToString:@"无网络"]) {
     
-    [manager POST:requestString parameters:paraDic progress:^(NSProgress * _Nonnull uploadProgress) {
+    [manager POST:requestString parameters:paraDic headers:nil progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
         if ([netWorkDelegate.delegate respondsToSelector:@selector(requestSucceedBack:withApiName:)]) {
             [netWorkDelegate.delegate requestSucceedBack:responseObject withApiName:apiName];
         }
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
         if ([netWorkDelegate.delegate respondsToSelector:@selector(requestFailBack:withApiName:)]) {
             NSLog(@"===error===%@", error);
             [netWorkDelegate.delegate requestFailBack:error withApiName:apiName];
         }
     }];
+    
 //        [manager POST:requestString parameters:paraDic success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //            
 //            if ([netWorkDelegate.delegate respondsToSelector:@selector(requestSucceedBack:withApiName:)]) {

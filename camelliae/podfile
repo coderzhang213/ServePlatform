@@ -1,0 +1,28 @@
+
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '10.0'
+target 'camelliae2.0' do
+
+inhibit_all_warnings!
+
+pod 'AFNetworking'
+pod 'UMCCommon'
+pod 'UMCSecurityPlugins'
+pod 'UMCAnalytics'
+pod 'UMCShare/Social/ReducedWeChat'
+pod 'UMCShare/Social/ReducedQQ'
+pod 'UMCShare/Social/ReducedSina'
+pod 'MJRefresh'
+pod 'MJExtension'
+pod 'Bugly'
+pod 'Masonry'
+pod 'YYKit'
+pod "HappyDNS"
+pod 'AlipaySDK-iOS'
+pod 'Qiniu'
+pod 'CLPlayer'
+#pod 'JPush'
+pod 'SDWebImage'
+pod 'WechatOpenSDK', '1.8.4'
+
+end

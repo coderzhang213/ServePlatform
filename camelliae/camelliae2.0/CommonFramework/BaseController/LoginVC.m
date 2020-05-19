@@ -15,11 +15,8 @@
 #import "LoginUserObj.h"
 #import "RegisterVC.h"
 #import <UMAnalytics/MobClick.h>
-#import <TencentOpenAPI/QQApiInterface.h>
 #import "WXApi.h"
 #import "PerfectInfoVC.h"
-#import <UMSocialCore/UMSocialCore.h>
-#import <UShareUI/UMSocialUIUtility.h>
 
 #import "ActivityDefaultVC.h"
 #import "CMLUserArticleVC.h"
@@ -554,11 +551,27 @@
 
     self.openIdType = [NSNumber numberWithInt:1];
     
-    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:self completion:^(id result, NSError *error) {
-        
-        if (error) {
+    if ([[UMSocialManager defaultManager] isInstall:UMSocialPlatformType_WechatSession]) {
+       
+        [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_WechatSession currentViewController:nil completion:^(id result, NSError *error) {
             
-        }else{
+            
+//            resultBlock(result,error);
+            
+            UMSocialUserInfoResponse *resp = result;
+            // 第三方登录数据(为空表示平台未提供)
+            // 授权数据
+            NSLog(@" uid: %@", resp.uid);
+            NSLog(@" openid: %@", resp.openid);
+            NSLog(@" accessToken: %@", resp.accessToken);
+            NSLog(@" refreshToken: %@", resp.refreshToken);
+            NSLog(@" expiration: %@", resp.expiration);
+            // 用户数据
+            NSLog(@" name: %@", resp.name);
+            NSLog(@" iconurl: %@", resp.iconurl);
+            NSLog(@" gender: %@", resp.unionGender);
+            // 第三方平台SDK原始数据
+            NSLog(@" originalResponse: %@", resp.originalResponse);
             
             if ([result isKindOfClass:[UMSocialUserInfoResponse class]]) {
                 
@@ -595,8 +608,12 @@
                     [self stopLoading];
                 }
             }
-        }
-    }];
+        }];
+    }else{
+        
+    }
+
+
 }
 
 #pragma mark - 进入主界面

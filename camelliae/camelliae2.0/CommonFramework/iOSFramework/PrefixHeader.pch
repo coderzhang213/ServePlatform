@@ -24,6 +24,15 @@
 #import "YYKit.h"
 #import "UIImageView+YYWebImage.h"
 #import <WebKit/WebKit.h>
+#import <WXApi.h>
+#import <WXApiObject.h>
+#import <UMCommon/UMCommon.h>
+#import <UMShare/UMShare.h>
+#import <UMSocialQQHandler.h>
+#import <UMSocialSinaHandler.h>
+#import <UMSocialWechatHandler.h>
+#import <UMAnalytics/MobClick.h>
+#import <CLPlayerView.h>
 
 //#import "CMLDotTypeVC.h"
 //#import "CMLNavigationBar.h"
@@ -34,6 +43,7 @@
 #import "NetWorkTask.h"
 #import "NetWorkDelegate.h"
 #import "BaseResultObj.h"
+#import <Bugly/Bugly.h>
 //#import "CMLLine.h"
 //#import "CMLShareModel.h"
 //#import "PushTransition.h"
@@ -46,6 +56,7 @@
 //#import "JQIndicatorView.h"
 //#import "UIImage+MultiFormat.h"
 #import "DataManager.h"
+#import <SDWebImage.h>
 //#import "AppGroup.h"
 //#import "NSString+CMLExspand.h"
 //#import "UIColor+SDExspand.h"

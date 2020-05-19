@@ -25,7 +25,6 @@
 #import "UIColor+SDExspand.h"
 #import "SVProgressHUD.h"
 #import "JQIndicatorView.h"
-#import "UIImage+MultiFormat.h"
 #import "DataManager.h"
 #import "AppGroup.h"
 #import "NSString+CMLExspand.h"
@@ -35,7 +34,6 @@
 #import "NSNumber+CMLExspand.h"
 #import "BaseResultObj.h"
 #import "LoginUserObj.h"
-#import <UMSocialCore/UMSocialCore.h>
 #import "CMLMobClick.h"
 
 typedef void (^ShareSuccessBlock)();
